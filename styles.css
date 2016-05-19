@@ -1,0 +1,12 @@
+#SendContactsOptions .hide,
+#sendGridContacts .hide {
+	display: none;
+}
+
+#sendGridContacts .success {
+	color: green;
+}
+
+#sendGridContacts .error {
+	color: darkred;
+}

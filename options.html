@@ -1,0 +1,28 @@
+<html>
+<head>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<form id="SendContactsOptions" name="form1" method="post" action="">
+	<input type="hidden" name="sg_submit_hidden" value="Y">
+
+	<p>SendGrid API Key: 
+	<input type="text" class="sg_api_key" name="sg_api_key" value="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" size="75">
+	</p><hr>
+	
+	<input class="getListsForApiKey" type="button" value="Get Lists for API Key" />
+	
+	<p class="listOfListsBox hide">List for this Site:
+		<div class="listOfLists">
+		</div>
+	</p>
+	
+	<p class="submit">
+	<input type="submit" name="Submit" class="button-primary" value="Save Options">
+	</p>
+
+	</form>
+	<script type="text/javascript" src="options.js"></script>
+</body>
+</html>
