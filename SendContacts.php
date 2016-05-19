@@ -36,7 +36,7 @@ function sendContacts_settingsMenu() {
 
 // register style sheet
 function register_sendContacts_styles() {
-	wp_register_style( 'sendContacts', plugins_url( '/SendContacts/styles.css' ) );
+	wp_register_style( 'sendContacts', plugins_url( '/SendContacts/form.css' ) );
 	wp_enqueue_style( 'sendContacts' );
 }
 
