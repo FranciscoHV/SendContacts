@@ -1,5 +1,3 @@
-//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
-
 (function(window, $, undefined) {
 	var $form = $("#sendContactsSignupForm"),
 		$results = $form.find(".results");
