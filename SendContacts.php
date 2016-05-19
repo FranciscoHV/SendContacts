@@ -35,21 +35,21 @@ function sendContacts_settingsMenu() {
 }
 
 // register style sheet
-add_action( 'admin_enqueue_style', 'register_sendContacts_styles' );
-add_action( 'wp_enqueue_style', 'register_sendContacts_styles' );
 function register_sendContacts_styles() {
-	wp_register_style( 'sendContacts', plugins_url( 'SendContacts/styles.css' ) );
+	wp_register_style( 'sendContacts', plugins_url( '/SendContacts/styles.css' ) );
 	wp_enqueue_style( 'sendContacts' );
 }
 
 // register javascript
-add_action( 'admin_enqueue_scripts', 'register_sendContacts_scripts' );
-add_action( 'wp_enqueue_script', 'register_sendContacts_scripts' );
-function register_sendContacts_scripts() {
-	wp_register_script( 'sendContacts-options', plugins_url( 'SendContacts/options.js' ), [], false, true );
+add_action( 'admin_enqueue_scripts', 'register_sendContacts_optionsScripts' );
+function register_sendContacts_optionsScripts() {
+	wp_register_script( 'sendContacts-options', plugins_url( '/SendContacts/options.js' ), [], false, true );
 	wp_enqueue_script( 'sendContacts-options' );
-	
-	wp_register_script( 'sendContacts-form', plugins_url( 'SendContacts/form.js' ), [], false, true );
+}
+
+// register javascript
+function register_sendContacts_formScripts() {
+	wp_register_script( 'sendContacts-form', plugins_url( 'form.js', __FILE__ ), [], false, true );
 	wp_enqueue_script( 'sendContacts-form' );
 }
 
@@ -165,8 +165,28 @@ function sendContacts_settingsPage() {
  
 }
 
-public function sendContactsForm() {
+function sendContactsForm() {	
+	add_action( 'wp_enqueue_style', 'register_sendContacts_styles' );
+	add_action( 'wp_enqueue_script', 'register_sendContacts_formScripts' );
+
+	// Read in existing option value from database
+    $opt_val = get_option( 'sendContacts_configData' );
+    
+    $savedData = json_decode($opt_val);
+    
+    $apiKey = $savedData->apiKey;
+    $listId = $savedData->listId;
+    ?>
+    
+    <form id="sendContactsSignupForm">
+		<input type="hidden" class="apiKey" value="<?php echo $apiKey; ?>" />
+		<input type="hidden" class="listId" value="<?php echo $listId; ?>" />
+		<input type="email" class="emailToAdd" />
+		<input type="button" class="subscribe" value="Subscribe to List" />
+		<div class="results"></div>
+	</form>
 	
+	<?php
 }
 
 ?>
