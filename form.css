@@ -1,11 +1,11 @@
-#sendGridContacts .hide {
+#sendContactsSignupForm .hide {
 	display: none;
 }
 
-#sendGridContacts .success {
+#sendContactsSignupForm .success {
 	color: green;
 }
 
-#sendGridContacts .error {
+#sendContactsSignupForm .error {
 	color: darkred;
 }
