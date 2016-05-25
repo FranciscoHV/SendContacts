@@ -5,6 +5,12 @@
 	$form.find(".getListsForApiKey").on("click", function(e) {
 		var apiKey = $form.find(".sg_api_key").val();
 
+		if (apiKey == "")
+		{
+			// if it's not in the UI field, then try the DB field as a backup...
+			apiKey = $form.find("db_api_key_value").val();
+		}
+
 		if (apiKey == "") {
 			alert("API Key is required in order to get Lists.");
 		}

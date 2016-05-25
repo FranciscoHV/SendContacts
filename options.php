@@ -14,11 +14,14 @@
             <tbody>
                 <tr>
                     <th scope="row"><label for="<?php echo $data['api_key_field']; ?>"><?php _e( 'SendGrid API Key', 'config-apiKeyFieldName' ); ?></label></th>
-                    <td><input type="text" class="regular-text code <?php echo $data['api_key_field']; ?>" id="<?php echo $data['api_key_field']; ?>" name="<?php echo $data['api_key_field']; ?>" value="<?php echo $data['api_key']; ?>" <?php echo $data['at_network'] ?> size="75"></td>
+                    <td>
+                        <input type="hidden" class=".db_api_key_value" value="<?php echo $data['api_key']; ?>" >
+                        <input type="text" class="regular-text code <?php echo $data['api_key_field']; ?>" id="<?php echo $data['api_key_field']; ?>" name="<?php echo $data['api_key_field']; ?>" <?php echo $data['at_network'] ?> size="75">
+                    </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="<?php echo $data['list_name']; ?>"><?php _e( 'Current Marketing List', 'config-currentListFieldName' ); ?></label></th>
-                    <td><input type="text" id="<?php echo $data['list_name']; ?>" value="<?php echo $data['list_name']; ?>" disabled="disabled" class="regular-text ltr" /></td>
+                    <th scope="row"><?php _e( 'Current Marketing List', 'config-currentListFieldName' ); ?></th>
+                    <td><?php echo $data['list_name']; ?></td>
                 </tr>
             </tbody>
         </table>
