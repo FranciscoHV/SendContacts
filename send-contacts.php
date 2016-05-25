@@ -138,7 +138,10 @@ class SendContacts {
 
 	function get_render($tpl, $data = array()){
 		extract($data);
-		include dirname(__FILE__).'/'.$tpl;
+        
+        ob_start();
+		require dirname(__FILE__).'/'.$tpl;
+        return ob_get_clean();
 	}
 }
 
