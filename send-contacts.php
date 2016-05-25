@@ -48,9 +48,6 @@ class SendContacts {
 	}
 
     function load() {
-        //add_action( 'wp_enqueue_style', array( 'SendContacts', 'register_styles' ) );
-        //add_action( 'wp_enqueue_script', array( 'SendContacts', 'register_scripts' ) );
-
         $sc = new SendContacts();
 
         $sc->register_styles();
@@ -95,8 +92,12 @@ class SendContacts {
 			$opts->list_id = $apiInfo[0];
 			$opts->list_name = $apiInfo[1];
 
-			// ensure that if the API Key changes, the List info is either changed or cleared out.
-			if ($opts->api_key != $api_key && $opts->list_id == $list_id) {
+			if ($opts->api_key == "") {
+				// the API Key isn't shown to the user, so if the field is blank then they didn't change it
+				// and we need to pull it from the DB values so that it's not overwritten.
+				$opts->api_key = $api_key;
+			} else if ($opts->list_id == $list_id) {
+				// ensure that if the API Key changes, the List info is either changed or cleared out.
 				$opts->list_id = "";
 				$opts->list_name = "";
 			}
@@ -118,7 +119,6 @@ class SendContacts {
 		$view_bag['at_network'] = $at_network;
 
 		$sc = new SendContacts();
-
 		$sc->get_render( 'options.php', $view_bag );
 	}
 
@@ -132,13 +132,13 @@ class SendContacts {
 		$view_bag['api_key'] = $savedData->api_key;
 
 		$sc = new SendContacts();
-
-		$sc->get_render( 'form.php', $view_bag );
+		$content = $sc->get_render( 'form.php', $view_bag );
+        return $content;
 	}
 
 	function get_render($tpl, $data = array()){
 		extract($data);
-		return require(dirname(__FILE__).'/'.$tpl);
+		include dirname(__FILE__).'/'.$tpl;
 	}
 }
 
@@ -154,6 +154,7 @@ add_action( 'admin_enqueue_scripts', array( 'SendContacts', 'register_scripts' )
 
 add_action( 'plugins_loaded', array( 'SendContacts', 'load' ) );
 
-add_shortcode( 'sendcontacts', array( 'SendContacts', 'short_code_func' ) );
-
+if (!is_admin()) {
+    add_shortcode('sendcontacts', array('SendContacts', 'short_code_func'));
+}
 
