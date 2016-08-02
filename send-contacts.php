@@ -4,23 +4,23 @@
 Plugin Name: SendContacts
 Plugin URI:  http://www.smartdatasystems.net/wordpress/sendcontacts
 Description: Provides simple mechanism to allow site visitors to sign up for SendGrid-powered marketing lists.
-Version:     1.0
+Version:     1.2
 Author:      Kris Hatcher
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-{Plugin Name} is free software: you can redistribute it and/or modify
+SendContacts is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 any later version.
 
-{Plugin Name} is distributed in the hope that it will be useful,
+SendContacts is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with {Plugin Name}. If not, see {URI to Plugin License}.
+along with SendContacts. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
 class SendContacts {
@@ -118,8 +118,11 @@ class SendContacts {
 		$view_bag['list_name'] = $list_name;
 		$view_bag['at_network'] = $at_network;
 
-		$sc = new SendContacts();
-		$sc->get_render( 'options.php', $view_bag );
+		//$sc = new SendContacts();
+		//$sc->get_render( 'options.php', $view_bag );
+
+		$data = $view_bag;
+		require dirname(__FILE__).'/options.php';
 	}
 
 	function short_code_func(){
